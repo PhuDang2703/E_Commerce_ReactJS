@@ -2,10 +2,8 @@ import styles from "./auth.module.scss"
 import registerImg from "../../assets/register.png"
 import Card from "../../components/card/Card"
 import { Link, useNavigate } from "react-router-dom"
-import { FaGoogle } from "react-icons/fa"
 import { useState } from "react"
-import { ToastContainer, toast } from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../../firebase/config"
 import Loader from "../../components/loader/Loader"
@@ -24,19 +22,16 @@ const Register = () => {
             toast.error("Password do not match.")
         }
         setIsLoading(true);
-
+        // search "create user with email password" sau khi bấm vào firebase developer docs
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-
+                console.log(user);
                 setIsLoading(false);
                 toast.success("Registration Successfull...");
                 navigate("/login");
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                
                 toast.error(error.message);
                 setIsLoading(false);
             });
@@ -44,7 +39,6 @@ const Register = () => {
 
     return (
         <>
-            <ToastContainer />
             {/* Loader này đc thực hiện khi lệnh bên trái isLoading là true */}
             {isLoading && <Loader />}
             <section className={`container ${styles.auth}`}>
