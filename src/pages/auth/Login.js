@@ -23,7 +23,7 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
+                // const user = userCredential.user;
                 setIsLoading(false);
                 toast.success("Sign In Successfully...");
                 navigate("/");
