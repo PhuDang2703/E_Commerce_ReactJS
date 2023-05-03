@@ -3,7 +3,7 @@ import styles from "./Header.module.scss"
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FaShoppingCart, FaTimes, FaUserCircle } from 'react-icons/fa'
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from 'react-toastify'
 import { auth } from '../../firebase/config'
 import { useDispatch } from 'react-redux'

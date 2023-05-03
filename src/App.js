@@ -26,7 +26,6 @@ function App() {
             <AdminOnlyRoute>
               <Admin />
             </AdminOnlyRoute>} />
-
         </Routes>
 
         <Footer />
