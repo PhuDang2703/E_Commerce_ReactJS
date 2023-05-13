@@ -10,6 +10,14 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
     reducer: rootReducer,
+    //api->getDefault middleware->Customizing the Included Middleware
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+    //   thunk: {
+    //     extraArgument: myCustomApiService,
+    //   },
+      serializableCheck: false,
+    }),
 })
 
 export default store;

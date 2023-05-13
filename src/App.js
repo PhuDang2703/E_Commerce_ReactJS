@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Home, Contact, Login, Register, Reset, Admin } from "./pages"
 import { Header, Footer } from "./components"
 import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute";
+import ProductDetails from "./components/product/productDetails/ProductDetails";
+
 
 //Đây là component lớn nhất bao bọc các component con rồi import vô index.js
 function App() {
@@ -26,6 +28,9 @@ function App() {
             <AdminOnlyRoute>
               <Admin />
             </AdminOnlyRoute>} />
+
+
+            <Route path="/product-details/:id" element={<ProductDetails />} />
         </Routes>
 
         <Footer />
