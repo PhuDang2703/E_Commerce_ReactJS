@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './ProductList.module.scss'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaListAlt } from 'react-icons/fa';
 import Search from '../../search/Search';
 import ProductItem from '../productItem/ProductItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { FILTER_BY_SEARCH, selectFilteredProducts } from '../../../redux/slice/filterSlice';
 
 const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const filteredProduct = useSelector(selectFilteredProducts);
+
+  useEffect(()=>{
+    dispatch(FILTER_BY_SEARCH(products, search))
+  }, [dispatch, products, search])
 
   return (
     <div className={styles["product-list"]}>
