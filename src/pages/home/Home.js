@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Slider from '../../components/slider/Slider'
-//import AdminOnlyRoute from '../../components/adminOnlyRoute/AdminOnlyRoute'
 import Product from '../../components/product/Product'
 
 const Home = () => {
@@ -9,6 +8,7 @@ const Home = () => {
 
   const scrollToProduct = () => {
     if(url.includes("#products")){
+      console.log("window",window)
       window.scrollTo({
         top: 700,
         behavior: 'smooth'
@@ -25,7 +25,6 @@ const Home = () => {
     <div>
       <Slider/>
       <Product/>
-      {/* <AdminOnlyRoute/> */}
     </div>
   )
 }

@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import styles from './ProductDetail.module.scss'
 import { Link, useParams } from 'react-router-dom'
-import { doc, getDoc } from "firebase/firestore";
-import { db } from '../../../firebase/config'
-import { toast } from 'react-toastify';
 import spinnerImg from '../../../assets/loader.gif'
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, DECREASE_CART, selectCartItems } from '../../../redux/slice/cartSlice';
+import useFetchDocument from '../../../customHooks/useFetchDocument';
+import useFetchCollection from '../../../customHooks/useFetchCollection';
+import Card from '../../card/Card';
+import StarsRating from 'react-star-rate';
 
 const ProductDetails = () => {
 
@@ -14,6 +15,10 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
+  const { document } = useFetchDocument("products", id);
+  const { data } = useFetchCollection("reviews")
+  console.log('data from review', data)
+  const filteredReviews = data.filter((review) => review.productID === id)
 
   const cart = cartItems.find((cart) => cart.id === id);
   const isCartAdded = cartItems.findIndex((cart) => {
@@ -21,9 +26,9 @@ const ProductDetails = () => {
   })
   console.log("isCartAdded", isCartAdded)
 
-  useEffect(() => {
-    getProduct();
-  }, [])
+  // useEffect(() => {
+  //   getProduct();
+  // }, [])
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product));
@@ -35,24 +40,9 @@ const ProductDetails = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
   }
 
-  //Search get document trong firebase
-  //Thêm async cho lỗi docSnap.exists is not a function
-  const getProduct = async () => {
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log("Document docRef:", docRef);
-      console.log("Document data:", docSnap.data());
-      const obj = {
-        id: id,
-        ...docSnap.data()
-      }
-      setProduct(obj)
-    } else {
-      toast.error("Product not found")
-    }
-  }
+  useEffect(() => {
+    setProduct(document)
+  }, [document]);
 
   return (
     <section>
@@ -96,6 +86,34 @@ const ProductDetails = () => {
           </>
         )}
 
+        <Card cardClass={styles.card}>
+          <h3>Product Reviews</h3>
+          <div>
+            {filteredReviews.length === 0 ? (
+              <p>There are no reviews for this product yet.</p>
+            ) : (
+              <>
+                {filteredReviews.map((item, index) => {
+                  const { rate, review, reviewDate, userName } = item;
+                  return (
+                    <div key={index} className={styles.review}>
+                      <StarsRating value={rate} />
+                      <p>{review}</p>
+                      <span style={{ fontSize: 14 }}>
+                        {reviewDate}
+                      </span>
+                      <br />
+
+                      <span style={{ fontSize: 14 }}>
+                        <b>By: {userName}</b>
+                      </span>
+                    </div>
+                  )
+                })}
+              </>
+            )}
+          </div>
+        </Card>
       </div>
     </section>
   )

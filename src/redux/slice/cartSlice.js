@@ -66,7 +66,7 @@ const cartSlice = createSlice({
         },
 
         CALCULATE_SUTOTAL(state, action) {
-            const array = []
+            const array = [];
             state.cartItems.map((item) => {
                 const { price, cartQuantity } = item;
                 const cartItemAmount = price * cartQuantity;

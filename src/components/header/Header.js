@@ -9,7 +9,7 @@ import { auth } from '../../firebase/config'
 import { useDispatch, useSelector } from 'react-redux'
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from '../../redux/slice/authSlice'
 import ShowOnLogin, { ShowOnLogout } from '../hiddenLink/hiddenLink'
-import AdminOnlyRoute, { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
+import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
 import { CALCULATE_TOTAL_QUANTITY, selectCartToltalQuantity } from '../../redux/slice/cartSlice'
 
 const logo = (
