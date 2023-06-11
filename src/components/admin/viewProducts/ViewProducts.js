@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './ViewProducts.module.scss'
 import { toast } from 'react-toastify';
-import { collection, deleteDoc, doc, limit, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { deleteDoc, doc} from 'firebase/firestore';
 import { db, storage } from '../../../firebase/config';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -92,7 +92,7 @@ const ViewProducts = () => {
     Notiflix.Confirm.show(
       'Delete Product!!!',
       'You are about to delete this product',
-      'Delelt',
+      'Delete',
       'Cancel',
       function okCb() {
         // alert('Thank you.');

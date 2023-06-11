@@ -4,7 +4,7 @@ import loginImg from "../../assets/login.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { FaGoogle } from 'react-icons/fa'
 import Card from '../../components/card/Card'
-import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { toast } from 'react-toastify'
 import { auth } from "../../firebase/config"
 import Loader from '../../components/loader/Loader'
@@ -51,8 +51,7 @@ const Login = () => {
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                const user = result.user;
-                // ...
+                // const user = result.user;
                 toast.success("Login Successfully...")
                 redirectUser()
             }).catch((error) => {

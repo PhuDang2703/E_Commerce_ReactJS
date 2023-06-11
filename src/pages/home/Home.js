@@ -6,20 +6,19 @@ const Home = () => {
   const url = window.location.href;
   // alert(url);
 
-  const scrollToProduct = () => {
-    if(url.includes("#products")){
-      console.log("window",window)
-      window.scrollTo({
-        top: 700,
-        behavior: 'smooth'
-      })
-      return;
-    }
-  };
-
   useEffect(() => {
+    const scrollToProduct = () => {
+      if(url.includes("#products")){
+        console.log("window",window)
+        window.scrollTo({
+          top: 700,
+          behavior: 'smooth'
+        })
+        return;
+      }
+    };
     scrollToProduct();
-  }, [])
+  }, [url])
 
   return (
     <div>

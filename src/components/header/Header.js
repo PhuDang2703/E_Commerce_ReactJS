@@ -50,8 +50,7 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        console.log(user)
+        console.log('header user', user)
 
         if (user.displayName == null) {
           // const u1 = user.email.slice(0, -10);
